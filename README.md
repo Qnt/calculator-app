@@ -1,1 +1,1 @@
-# Simpe calculatop in your browser
+# Simpe calculator in your browser
