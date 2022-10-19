@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+
+:root {
+  --White: hsl(0, 0%, 100%);
+  
+  --Theme-One-Main-Background: hsl(222, 26%, 31%);
+  --Theme-One-Toggle-Keypad-Background: hsl(223, 31%, 20%);
+  --Theme-One-Screen-Background: hsl(224, 36%, 15%);
+  --Theme-One-Key-Background-Desaturated-Dark-Blue: hsl(225, 21%, 49%);
+  --Theme-One-Key-Shadow-Desaturated-Dark-Blue: hsl(224, 28%, 35%);
+  --Theme-One-Key-Background-Red: hsl(6, 63%, 50%);
+  --Theme-One-Key-Shadow-Dark-Red: hsl(6, 70%, 34%);
+  --Theme-One-Key-Background-Light-Grayinsh-Orange: hsl(30, 25%, 89%);
+  --Theme-One-Key-Shadow-Grayish-Orange: hsl(28, 16%, 65%);
+  --Theme-One-Text-Very-Dark-Grayish-Blue: hsl(221, 14%, 31%);
+
+  --Theme-Two-Main-Background: hsl(0, 0%, 90%);
+  --Theme-Two-Toggle-Keypad-Background: hsl(0, 5%, 81%);
+  --Theme-Two-Screen-Background: hsl(0, 0%, 93%);
+  --Theme-Two-Key-Background-Dark-Moderate-Cyan: hsl(185, 42%, 37%);
+  --Theme-Two-Key-Shadow-Very-Dark-Cyan: hsl(185, 58%, 25%);
+  --Theme-Two-Key-Background-Orange: hsl(25, 98%, 40%);
+  --Theme-Two-Key-Shadow-Dark-Orange: hsl(25, 99%, 27%);
+  --Theme-Two-Key-Background-Light-Grayinsh-Yellow: hsl(45, 7%, 89%);
+  --Theme-Two-Key-Shadow-Dark-Grayish-Orange: hsl(35, 11%, 61%);
+  --Theme-One-Text-Very-Dark-Grayish-Yellow: hsl(60, 10%, 19%);
+
+  --Theme-Three-Main-Background: hsl(268, 75%, 9%);
+  --Theme-Three-Toggle-Keypad-Screen-Background: hsl(268, 71%, 12%);
+  --Theme-Three-Key-Background-Dark-Violet: hsl(281, 89%, 26%);
+  --Theme-Three-Key-Shadow-Vivid-Magenta: hsl(285, 91%, 52%);
+  --Theme-Three-Key-Background-Pure-Cyan: hsl(176, 100%, 44%);
+  --Theme-Three-Key-Shadow-Soft-Cyan: hsl(25, 99%, 27%);
+  --Theme-Three-Key-Background-Very-Dark-Violet: hsl(268, 47%, 21%);
+  --Theme-Three-Key-Shadow-Dark-Magenta: hsl(35, 11%, 61%);
+  --Theme-Three-Text-Light-Yellow: hsl(52, 100%, 62%);
+  --Theme-Three-Text-Very-Dark-Blue: hsl(198, 20%, 13%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--Theme-One-Main-Background);
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.main-container {
+  /* margin: auto; */
+  height: 620px;
+  width: 330px;
+  border-style: solid;
+  border: 4px;
+  border-color: var(--White);
+  display: grid;
+  grid-template-rows: 70px 130px 420px;
+}
+
+.title {
+  color: var(--White);
+}
+
+.top-part {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.screen-part {
+  background-color: var(--Theme-One-Screen-Background);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0px 24px;
+  border-radius: 8px;
+  display: grid;
+  justify-items: end;
+  align-content: center;
+}
+
+.screen-output {
+  color: var(--White);
+  font-size: 40px;
+}
+
+.keypad-part {
+  background-color: var(--Theme-One-Toggle-Keypad-Background);
+  padding: 24px;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  gap: 18px 12px;
+  border-radius: 8px;
+}
+
+.main-container button {
+  border-style: none;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.key-number, .key-operator {
+  background-color: var(--Theme-One-Key-Background-Light-Grayinsh-Orange);
+  box-shadow: 0px 4px 0px 0px var(--Theme-One-Key-Shadow-Grayish-Orange);
+  color: var(--Theme-One-Text-Very-Dark-Grayish-Blue);
+}
+
+.key-delete {
+  background-color: var(--Theme-One-Key-Background-Desaturated-Dark-Blue);
+  box-shadow: 0px 4px 0px 0px var(--Theme-One-Key-Shadow-Desaturated-Dark-Blue);
+  color: var(--White);
+  text-transform: uppercase;
+  font-size: 20px;
+
+}
+.key-reset {
+  grid-column: span 2;
+  background-color: var(--Theme-One-Key-Background-Desaturated-Dark-Blue);
+  box-shadow: 0px 4px 0px 0px var(--Theme-One-Key-Shadow-Desaturated-Dark-Blue);
+  color: var(--White);
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.key-equal {
+  grid-column: span 2;
+  background-color: var(--Theme-One-Key-Background-Red);
+  box-shadow: 0px 4px 0px 0px var(--Theme-One-Key-Shadow-Dark-Red);
+  color: var(--White);
+}
