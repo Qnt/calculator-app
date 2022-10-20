@@ -23,9 +23,12 @@ class Calculator {
   };
 
   chooseOperator = (operator) => {
+    if (this.operator !== undefined) {
+      this.calculate();
+    }
     this.operator = operator;
     this.prevValue = this.currentValue;
-    this.currentValue = '0';
+    this.currentValue = '';
   }
 
   calculate = () => {
@@ -35,23 +38,30 @@ class Calculator {
       case 'x': this.result = parseFloat(this.prevValue) * parseFloat(this.currentValue); break;
       case '/': this.result = parseFloat(this.prevValue) / parseFloat(this.currentValue); break;
     }
+    this.currentValue = this.result;
+    this.prevValue = '';
+    this.operator = undefined;
   }
 
   resetValues = () => {
-    this.currentValue = '0';
-    this.prevValue = '0';
+    this.currentValue = '';
+    this.prevValue = '';
+    this.operator = undefined;
     this.result = undefined;
   }
 
   deleteCurrentValue = () => {
-    this.currentValue = '0';
+    this.currentValue = '';
   }
 
   display = () => {
     if (this.result !== undefined) {
       screenElement.textContent = this.result;
-    } else {
+    }
+    if (this.currentValue !== '') {
       screenElement.textContent = this.currentValue;
+    } else {
+      screenElement.textContent = this.prevValue;
     }
   }
 }
@@ -62,6 +72,7 @@ numberButtons.forEach((button) => {
   button.addEventListener('click', () => {
     calculator.appendDigit(button.textContent);
     calculator.display();
+    console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
   });
 });
 
@@ -69,13 +80,14 @@ operatorButtons.forEach((button) => {
   button.addEventListener('click', () => {
     calculator.chooseOperator(button.textContent);
     calculator.display();
+    console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
   });
 });
 
 calculateButton.addEventListener('click', () => {
   calculator.calculate();
   calculator.display();
-  calculator.resetValues();
+  console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
 });
 
 deleteButton.addEventListener('click', () => {
