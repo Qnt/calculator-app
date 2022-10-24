@@ -8,17 +8,18 @@ const screenElement = document.querySelector('.screen-output');
 
 class Calculator {
   constructor(prevValue, currentValue) {
-    this.prevValue = prevValue;
-    this.currentValue = currentValue;
+    this.prevValue = prevValue.toString();
+    this.currentValue = currentValue.toString();
     this.result;
     this.operator;
   }
   
   appendDigit = (digitToAdd) => {
     if (digitToAdd === '.' && this.currentValue.includes('.')) return;
-    this.currentValue += digitToAdd.toString();
-    if (this.currentValue[0] === '0' && this.currentValue.length > 1) {
-      this.currentValue = this.currentValue.slice(1);
+    if (this.currentValue === '0' && digitToAdd !== '.' || this.operator === undefined) {
+      this.currentValue = digitToAdd.toString();
+    } else {
+      this.currentValue += digitToAdd.toString();
     }
   };
 
@@ -27,25 +28,36 @@ class Calculator {
       this.calculate();
     }
     this.operator = operator;
-    this.prevValue = this.currentValue;
+    if (this.currentValue !== '') {
+      this.prevValue = this.currentValue;
+    } else {
+      this.prevValue = this.result;
+    }
     this.currentValue = '';
   }
 
   calculate = () => {
-    switch(this.operator) {
-      case '+': this.result = parseFloat(this.prevValue) + parseFloat(this.currentValue); break;
-      case '-': this.result = parseFloat(this.prevValue) - parseFloat(this.currentValue); break;
-      case 'x': this.result = parseFloat(this.prevValue) * parseFloat(this.currentValue); break;
-      case '/': this.result = parseFloat(this.prevValue) / parseFloat(this.currentValue); break;
+    if (this.currentValue === '') {
+      this.currentValue = this.prevValue;
     }
-    this.currentValue = this.result;
-    this.prevValue = '';
-    this.operator = undefined;
+    if (this.operator !== undefined) {
+      switch(this.operator) {
+        case '+': this.result = parseFloat(this.prevValue) + parseFloat(this.currentValue); break;
+        case '-': this.result = parseFloat(this.prevValue) - parseFloat(this.currentValue); break;
+        case 'x': this.result = parseFloat(this.prevValue) * parseFloat(this.currentValue); break;
+        case '/': this.result = parseFloat(this.prevValue) / parseFloat(this.currentValue); break;
+      }
+      this.currentValue = '';
+      this.prevValue = this.result;
+      this.operator = undefined;
+    } else {
+      this.result = this.currentValue;
+    }
   }
 
   resetValues = () => {
     this.currentValue = '';
-    this.prevValue = '';
+    this.prevValue = '0';
     this.operator = undefined;
     this.result = undefined;
   }
@@ -55,14 +67,14 @@ class Calculator {
   }
 
   display = () => {
-    if (this.result !== undefined) {
-      screenElement.textContent = this.result;
+    let displayValue = this.currentValue;
+    if (this.currentValue === '') {
+      displayValue = this.result;
+      if(this.result === undefined){
+        displayValue = '0';
+      }
     }
-    if (this.currentValue !== '') {
-      screenElement.textContent = this.currentValue;
-    } else {
-      screenElement.textContent = this.prevValue;
-    }
+    screenElement.textContent = displayValue;
   }
 }
 
@@ -72,7 +84,6 @@ numberButtons.forEach((button) => {
   button.addEventListener('click', () => {
     calculator.appendDigit(button.textContent);
     calculator.display();
-    console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
   });
 });
 
@@ -80,14 +91,12 @@ operatorButtons.forEach((button) => {
   button.addEventListener('click', () => {
     calculator.chooseOperator(button.textContent);
     calculator.display();
-    console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
   });
 });
 
 calculateButton.addEventListener('click', () => {
   calculator.calculate();
   calculator.display();
-  console.log(`prev: ${calculator.prevValue} oper: ${calculator.operator} cur: ${calculator.currentValue} res: ${calculator.result}`);
 });
 
 deleteButton.addEventListener('click', () => {
